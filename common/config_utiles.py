@@ -32,8 +32,14 @@ class ConfigUtils:
         driver_name_value = self.read_ini('default', 'driver_name')
         return driver_name_value
 
+    #默认等待5s
+    @property
+    def time_out(self):
+        driver_time_out = float(self.read_ini('default', 'time_out'))
+        return driver_time_out
+
 local_config = ConfigUtils()  # 全局对象Config
 if __name__ == '__main__':
     config_u = ConfigUtils()
-    print(config_u.driver_name)
+    print(type(config_u.time_out),local_config.time_out)
 

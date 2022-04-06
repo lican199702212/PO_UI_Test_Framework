@@ -1,9 +1,8 @@
 import os
 import time
 
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from login_page import LoginPage
+from element_infos.login.login_page import LoginPage
 from common.logo_utiles import logo_utiles
 
 current_path = os.path.dirname(__file__)  # 获取当前路径

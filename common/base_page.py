@@ -1,13 +1,16 @@
-import os,time
+import os
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from common.logo_utiles import logo_utiles # 日志文件
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from common.logo_utiles import logo_utiles # 日志文件
+from common.config_utiles import local_config #配置文件
+
 class BasePage(object):
     def __init__(self,driver): #初始化一个driver
-        self.driver = driver  # webdriver.Chrome() #
+        self.driver = webdriver.Chrome() #driver
 
     #浏览器的操作封装 ==>二次封装
     def open_url(self,url):
@@ -25,6 +28,10 @@ class BasePage(object):
     def quit(self):
         self.driver.quit()
         logo_utiles.info("退出浏览器")
+
+    def implicitly_wait(self,seconds=local_config.time_out):
+        self.driver.implicitly_wait(seconds)
+        logo_utiles.info('隐式等待')
 
     def get_title(self):
         value = self.driver.title
@@ -69,7 +76,61 @@ class BasePage(object):
         element = self.find_element(element_info) #
         element.click()
         logo_utiles.info('[%s]元素进行点击操作' % element_info['element_name'])
+
     def input_sendkeys(self,element_info,content):
         element = self.find_element(element_info)  #
         element.send_keys(content)
         logo_utiles.info('[%s]元素进行输入内容：%s' % (element_info['element_name'],content))
+
+    #frame ==>id/name frname元素对象
+    #思路一  推荐 简单明了
+    def switch_to_frname(self,element_info):
+        element = self.find_element(element_info)
+        self.driver.switch_to.frame(element)
+        # 释放frame，重新回到主页面上
+        #driver.switch_to.default_content()
+
+    #思路二
+    def switch_to_frname_id_or_name(self,id_or_name):
+        self.driver.switch_to.frame(id_or_name)
+
+    def switch_to_frname_by_element(self,element_info):
+        element = self.find_element(element_info)
+        self.driver.switch_to.frame(element)
+
+    #思路三
+    def switch_to_frame_01(self,**element_dict):
+        self.wait(3)
+        if 'id' in element_dict.keys():
+            self.driver.switch_to.frame(element_dict['id'])
+        elif 'name' in element_dict.keys():
+            self.driver.switch_to.frame(element_dict['name'])
+        elif 'element' in element_dict.keys():
+            element = self.find_element(element_dict['element'])
+            self.driver.switch_to.frame(element)
+
+    # selenuim 执行js
+    def excute_script(self,js_str,element_info=None):
+        if element_info:
+            self.driver.excute_script(js_str)
+        else:
+            self.driver.excute_script(js_str,None)
+
+    def delete_element(self,element_info,attribute_name):
+        element = self.find_element(element_info)
+        self.excute_script('arguments[0].removerAttribute("%s");'%attribute_name,element)
+
+    # 等待封装
+
+    def wait(self,seconds=local_config.time_out): #固定等待
+        time.sleep(seconds)
+
+
+
+
+
+
+
+
+
+
