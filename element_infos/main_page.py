@@ -1,4 +1,6 @@
 import os
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from login_page import LoginPage
@@ -46,4 +48,6 @@ if __name__ == '__main__':
     value = main_page.get_text_name()
     print(value)
     main_page.get_click_neibu()
+    time.sleep(2)
+    main_page.get_click_qiye()
 
