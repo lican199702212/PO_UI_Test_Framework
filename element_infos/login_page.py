@@ -1,9 +1,13 @@
 import os
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
 from common.logo_utiles import logo_utiles # 日志文件
 from common.base_page import BasePage
 from common.element_data_utiles import ElementdataUtiles # 封装的excel方法
+from common.browser_driver import BrowserDriver  #封装drvier方法
 
 class LoginPage(BasePage):
     def __init__(self,driver):
@@ -55,13 +59,12 @@ class LoginPage(BasePage):
         self.click_the_button(self.login_button)
 
 if __name__ == '__main__':
-    current_path = os.path.dirname(__file__)  # 获取当前路径
-    webdriber_path = os.path.join(current_path, '..\webdriver\chromedriver.exe')
-    driver =webdriver.Chrome(executable_path=webdriber_path)
+    driver = BrowserDriver().get_driver_name() #get_driver_name 判断浏览器驱动
     login_page = LoginPage(driver) # 创建一个对象，但是你引入的是父类，父类需要一个driver。所以你要传driver进去
     login_page.open_url('https://hfw.sj56.com.cn/tes/main/index.html#')
     login_page.input_username('18874209921')
     login_page.input_pasword('Lc19970212..')
     login_page.click_login()
     login_page.set_browser_max()
+    time.sleep(1)
     login_page.quit()

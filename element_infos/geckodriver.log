@@ -1,0 +1,20 @@
+1649228773645	geckodriver	INFO	Listening on 127.0.0.1:50292
+1649228776673	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\user\\AppData\\Local\\Temp\\rust_mozprofileaL4K3V"
+1649228776988	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\user\\AppData\\Local\\Temp\\rust_mozprofileaL4K3V\\search.json.mozlz4", (void 0)))
+1649228778991	Marionette	INFO	Listening on port 50300
+1649228779342	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[Child 1596, MediaDecoderStateMachine #1] WARNING: 25e3a400 Could not set cubeb stream name.: file /builds/worker/checkouts/gecko/dom/media/AudioStream.cpp:367
+1649228783767	Marionette	INFO	Stopped listening on port 50300
+JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+console.error: services.settings: 
+  main/query-stripping Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/partitioning-exempt-urls Signature failed  TypeError: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x390076,name=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x23002E,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: C:\Users\user\AppData\Local\Temp\rust_mozprofileaL4K3V\protections.sqlite
